@@ -2,6 +2,7 @@
 "use client";
 import { GridBackground } from "./GridPattern";
 import { motion } from "motion/react";
+import SlideArrowButton from "./SlideArrowButton";
 
 export default function Home() {
   return (
@@ -64,7 +65,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 w-full sm:w-auto">
             {/* Book A Demo Button */}
             <motion.button
-              className="group relative flex items-center rounded-full bg-white h-14 px-4 w-full sm:w-auto overflow-hidden"
+              className="group relative flex items-center rounded-full bg-black h-14 px-4 w-full sm:w-auto overflow-hidden"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
@@ -77,45 +78,17 @@ export default function Home() {
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               />
 
-              <div className="relative flex items-center gap-3 w-full justify-center">
-                <motion.div className="flex items-center justify-center rounded-full bg-[#0E0F0C] group-hover:bg-white p-3 relative z-10 transition-colors duration-400">
-                  <motion.svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-white group-hover:text-[#0E0F0C] transition-colors duration-400"
-                    whileHover={{ x: 2 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <path
-                      d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M3.5 12H20.33"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg>
-                </motion.div>
-                <span className="text-[#0E0F0C] group-hover:text-white text-base font-medium relative z-10 transition-colors duration-400">
-                  Book A Demo
-                </span>
-              </div>
+              <SlideArrowButton
+                text="Book a Demo"
+                primaryColor="#0E0F0C"
+                textColor="text-black"
+                hoverTextColor="group-hover:text-white"
+              />
             </motion.button>
 
             {/* Get Started Button */}
             <motion.button
-              className="group relative flex items-center rounded-full bg-[#BAFF38] h-14 px-4 w-full sm:w-auto overflow-hidden"
+              className="group relative flex items-center rounded-full  h-14 px-4 w-full sm:w-auto overflow-hidden"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.2 }}
@@ -128,9 +101,7 @@ export default function Home() {
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               />
 
-              <div className="relative flex items-center gap-3 w-full justify-center">
-                <motion.div className="flex items-center justify-center rounded-full bg-white group-hover:bg-[#BAFF38] p-3 relative z-10 transition-colors duration-400">
-                  <motion.svg
+              {/* <motion.svg
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
@@ -156,12 +127,9 @@ export default function Home() {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                  </motion.svg>
-                </motion.div>
-                <span className="text-[#0E0F0C] group-hover:text-[#0E0F0C] text-base font-medium relative z-10 transition-colors duration-400">
-                  Get Started
-                </span>
-              </div>
+                  </motion.svg> */}
+
+              <SlideArrowButton text="Get Started" />
             </motion.button>
           </div>
         </div>
@@ -169,7 +137,7 @@ export default function Home() {
         {/* Dashboard Image */}
         <div className="mt-16 md:mt-24 lg:mt-32 px-4 md:px-6 max-w-7xl w-full">
           <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/f5e1d64b4c89af898c5061672d6466709ce74511?width=2426"
+            src="/hero.png"
             alt="Remoplus Dashboard"
             className="w-full h-auto rounded-2xl md:rounded-3xl border border-white/10"
           />
