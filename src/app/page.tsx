@@ -6,6 +6,7 @@ import { StickyHeader } from "@/components/Navbar";
 import HomeComponent from "@/components/Home";
 import { Companies } from "@/components/Companies";
 import { FeautureItems } from "@/components/items";
+import Efforts from "@/components/Efforts";
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -15,6 +16,7 @@ export default function Home() {
       <HomeComponent />
       <Companies />
       <FeautureItems />
+      <Efforts />
     </div>
   );
 }
