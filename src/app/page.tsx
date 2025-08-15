@@ -15,16 +15,18 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-auto bg-black">
+    <div ref={containerRef} className="min-h-screen overflow-y-auto bg-black">
       <StickyHeader containerRef={containerRef} />
-      <HomeComponent />
-      <Companies />
-      <FeautureItems />
-      <Efforts />
-      <Testimonals />
-      <BentoShowcase />
-      <Pricing />
-      <Footer />
+      <main className="w-full">
+        <HomeComponent />
+        <Companies />
+        <FeautureItems />
+        <Efforts />
+        <Testimonals />
+        <BentoShowcase />
+        <Pricing />
+        <Footer />
+      </main>
     </div>
   );
 }

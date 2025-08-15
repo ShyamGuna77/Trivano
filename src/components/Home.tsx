@@ -10,7 +10,7 @@ export default function Home() {
       <GridBackground />
 
       {/* Hero Section */}
-      <main className="relative z-10 flex flex-col items-center pt-16 md:pt-24 lg:pt-32 px-4 md:px-6">
+      <main className="relative z-10 flex flex-col items-center pt-20 md:pt-24 lg:pt-32 px-4 md:px-6">
         <div className="flex flex-col items-center gap-8 md:gap-12 max-w-4xl">
           {/* Tagline with avatars */}
           <div className="flex flex-col items-center gap-4 md:gap-6">
@@ -62,84 +62,45 @@ export default function Home() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 md:gap-4 w-full sm:w-auto">
-            {/* Book A Demo Button */}
-            <motion.button
-              className="group relative flex items-center rounded-full bg-black h-14 px-4 w-full sm:w-auto overflow-hidden"
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto sm:max-w-none">
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="w-full sm:w-auto"
             >
-              {/* Fill animation background */}
-              <motion.div
-                className="absolute inset-0 bg-[#0E0F0C] rounded-full"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              />
-
               <SlideArrowButton
                 text="Book a Demo"
                 primaryColor="#0E0F0C"
                 textColor="text-black"
-                hoverTextColor="group-hover:text-white"
+                hoverTextColor="group-hover:text-white group-active:text-white"
+                className="w-full sm:w-auto justify-center touch-manipulation"
               />
-            </motion.button>
+            </motion.div>
 
-            {/* Get Started Button */}
-            <motion.button
-              className="group relative flex items-center rounded-full  h-14 px-4 w-full sm:w-auto overflow-hidden"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="w-full sm:w-auto"
             >
-              {/* Fill animation background */}
-              <motion.div
-                className="absolute inset-0 bg-white rounded-full"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "0%" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
+              <SlideArrowButton
+                text="Get Started"
+                primaryColor="#BAFF38"
+                textColor="text-black"
+                hoverTextColor="group-hover:text-black group-active:text-black"
+                className="w-full sm:w-auto justify-center touch-manipulation"
               />
-
-              {/* <motion.svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#0E0F0C] transition-colors duration-400"
-                    whileHover={{ x: 2 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <path
-                      d="M14.43 5.92993L20.5 11.9999L14.43 18.0699"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M3.5 12H20.33"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </motion.svg> */}
-
-              <SlideArrowButton text="Get Started" />
-            </motion.button>
+            </motion.div>
           </div>
         </div>
 
         {/* Dashboard Image */}
-        <div className="mt-16 md:mt-24 lg:mt-32 px-4 md:px-6 max-w-7xl w-full">
+        <div className="mt-12 md:mt-16 lg:mt-24 px-4 md:px-6 max-w-7xl w-full">
           <img
             src="/hero.png"
             alt="Remoplus Dashboard"
-            className="w-full h-auto rounded-2xl md:rounded-3xl border border-white/10"
+            className="w-full h-auto rounded-xl md:rounded-2xl lg:rounded-3xl border border-white/10"
           />
         </div>
       </main>
