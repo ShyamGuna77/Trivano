@@ -5,6 +5,7 @@ import {
   FolderOpen,
   CheckSquare,
   Video,
+  File,
 } from "lucide-react";
 import Image from "next/image";
 import SlideArrowButton from "./SlideArrowButton";
@@ -20,7 +21,7 @@ export default function Efforts() {
       <div className="px-4 md:px-6 max-w-7xl w-full mx-auto relative">
         {/* Header text */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-[#EAECE5] mb-6">
+          <h2 className="md:text-4xl lg:text-5xl text-[#EAECE5] mb-6 text-4xl font-extrabold tracking-tight text-balance">
             Powerful Remote Collaboration
           </h2>
           <p className="text-[#EAECE5]/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
@@ -29,20 +30,20 @@ export default function Efforts() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-center">
           {/* Left side - Pending Tasks Widget */}
           <div className="relative">
             <Image
               src="/Grid1.png"
               alt="Pending Tasks Widget"
-              width={400}
-              height={300}
-              className="max-w-sm rounded-2xl border border-white/10"
+              width={600}
+              height={400}
+              className="w-full max-w-lg rounded-2xl border border-white/10"
             />
           </div>
 
           {/* Right side - Features text and checklist */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
               <p className="text-[#EAECE5]/70 text-lg leading-relaxed mb-8">
                 Real-time communication solutions that keep your entire team
@@ -50,13 +51,13 @@ export default function Efforts() {
               </p>
 
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1">
                   <div className="w-8 h-8 rounded-lg bg-[#BAFF38]/20 flex items-center justify-center">
                     <MessageSquare className="w-4 h-4 text-[#BAFF38]" />
                   </div>
                   <span className="text-[#EAECE5]">Real-time messaging</span>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-[#BAFF38]/20 flex items-center justify-center">
                     <FolderOpen className="w-4 h-4 text-[#BAFF38]" />
                   </div>
@@ -90,20 +91,34 @@ export default function Efforts() {
               overall team productivity and efficiency with advanced features.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 variant="outline"
-                className="border-white/20 text-[#EAECE5] hover:bg-[#BAFF38]/10 hover:border-[#BAFF38]/30 px-6 py-3 rounded-xl bg-transparent"
+                className="border-white/20 text-[#EAECE5] hover:bg-[#BAFF38]/10 hover:text-zinc-200 hover:border-[#BAFF38]/30 px-6 py-10 rounded-xl bg-transparent flex items-center gap-3"
               >
-                <div className="w-5 h-5 rounded-full bg-[#BAFF38] mr-3"></div>
-                Streamlined Workspaces
+                <div className="w-8 h-8 rounded-lg bg-[#BAFF38]/20 flex items-center justify-center">
+                  <CheckSquare className="w-4 h-4 text-[#BAFF38]" />
+                </div>
+                <div className="text-left">
+                  <div className="font-medium ">Streamlined Workspaces</div>
+                  <div className="text-xs text-[#EAECE5]/60 ">
+                    Build organized teamwork
+                  </div>
+                </div>
               </Button>
               <Button
                 variant="outline"
-                className="border-white/20 text-[#EAECE5] hover:bg-[#BAFF38]/10 hover:border-[#BAFF38]/30 px-6 py-3 rounded-xl bg-transparent"
+                className="border-white/20 text-[#EAECE5] hover:bg-[#BAFF38]/10 hover:text-zinc-200 hover:border-[#BAFF38]/30 px-6 py-10 rounded-xl bg-transparent flex items-center gap-3"
               >
-                <div className="w-5 h-5 rounded-full bg-[#BAFF38] mr-3"></div>
-                File Sharing
+                <div className="w-8 h-8 rounded-lg bg-[#BAFF38]/20 flex items-center justify-center">
+                  <File className="w-4 h-4 text-[#BAFF38]" />
+                </div>
+                <div className="text-left">
+                  <div className="font-medium">File Sharing</div>
+                  <div className="text-xs text-[#EAECE5]/60">
+                    Share files, control access
+                  </div>
+                </div>
               </Button>
             </div>
 
@@ -111,18 +126,18 @@ export default function Efforts() {
               text="Learn More"
               primaryColor="#BAFF38"
               textColor="text-black"
-              hoverTextColor="group-hover:text-white"
+              hoverTextColor="group-hover:text-black"
             />
           </div>
 
           {/* Right side - Calendar Widget */}
-          <div className="flex justify-end">
+          <div className="flex justify-center lg:justify-end">
             <Image
               src="/Grid2.png"
               alt="Calendar Widget"
-              width={400}
-              height={350}
-              className="max-w-sm w-full rounded-2xl border border-white/10"
+              width={600}
+              height={450}
+              className="w-full max-w-lg rounded-2xl border border-white/10"
             />
           </div>
         </div>

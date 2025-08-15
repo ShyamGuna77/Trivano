@@ -138,3 +138,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.font-gilroy-regular {
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.font-gilroy-semibold {
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
+}
