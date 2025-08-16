@@ -1,16 +1,26 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import type React from "react";
 
-import { AnimatePresence, motion, MotionConfig } from "motion/react";
+import { motion, MotionConfig } from "motion/react";
+import { cubicBezier, easeOut } from "motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export function useScrollY() {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     // Add scroll event listener
@@ -40,121 +50,187 @@ export function StickyHeader() {
     []
   );
 
+  // Optimized easing functions for responsive animations
+  const responsiveEasing = cubicBezier(0.16, 1, 0.3, 1); // Smooth and responsive
+
+  const springTransition = {
+    duration: 0.35,
+    ease: easeOut, // Responsive feel as recommended
+  };
+
+  const smoothTransition = {
+    duration: 0.3,
+    ease: responsiveEasing, // Custom smooth curve
+  };
+
+  const fastTransition = {
+    duration: 0.25,
+    ease: easeOut,
+  };
+
+  const isScrolled = scrollY >= 120;
+
   return (
-    <header
+    <motion.header
       ref={stickyNavRef}
-      className={`fixed top-4 left-4 right-4 z-50 rounded-full mx-auto max-w-6xl transition-all duration-300 ${
-        scrollY >= 120
-          ? "px-4 py-2 bg-black/95 backdrop-blur-md shadow-2xl"
-          : "px-6 py-4 bg-black/70 backdrop-blur-sm shadow-lg"
-      }`}
+      animate={{
+        width: isScrolled ? "auto" : "calc(100% - 2rem)",
+        maxWidth: isScrolled ? "480px" : "1152px",
+        paddingLeft: isScrolled ? "8px" : "24px",
+        paddingRight: isScrolled ? "8px" : "24px",
+        paddingTop: isScrolled ? "8px" : "16px",
+        paddingBottom: isScrolled ? "8px" : "16px",
+      }}
+      transition={springTransition}
+      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-full"
+      style={{
+        backgroundColor: isScrolled ? "#1a1f1e" : "rgba(0, 0, 0, 0.7)",
+        backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
+        boxShadow: isScrolled
+          ? "0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1)"
+          : "0 4px 16px rgba(0,0,0,0.2)",
+      }}
     >
-      <nav className="relative mx-auto flex items-center justify-between max-w-6xl">
-        <div className="flex items-center gap-2">
-          <motion.img
-            className="h-10 w-10"
+      <nav className="relative mx-auto flex items-center justify-center">
+        {/* Logo and Title Container */}
+        <motion.div
+          className="flex items-center gap-2 overflow-hidden"
+          animate={{
+            width: isScrolled ? "0px" : "auto",
+            opacity: isScrolled ? 0 : 1,
+            marginRight: isScrolled ? "0px" : "32px",
+            scale: isScrolled ? 0.8 : 1,
+          }}
+          transition={{
+            ...smoothTransition,
+            opacity: {
+              duration: 0.25,
+              ease: easeOut,
+              delay: isScrolled ? 0 : 0.05,
+            },
+          }}
+        >
+          <img
+            className="h-10 w-10 flex-shrink-0"
             src="/Trivano.png"
             alt="Company Logo"
-            animate={{
-              y: scrollY >= 120 ? -50 : 0,
-              opacity: scrollY >= 120 ? 0 : 1,
-            }}
-            transition={{ duration: 0.15 }}
           />
-          <motion.h1
-            className="text-white font-bold text-xl"
-            animate={{
-              y: scrollY >= 120 ? -50 : 0,
-              opacity: scrollY >= 120 ? 0 : 1,
-            }}
-            transition={{ duration: 0.15 }}
-          >
+          <h1 className="text-white font-bold text-xl whitespace-nowrap">
             Trivano
-          </motion.h1>
-        </div>
+          </h1>
+        </motion.div>
 
-        <ul className="sticky left-4 right-4 top-4 z-[60] hidden items-center justify-center gap-x-5 md:flex">
-          <motion.div
-            initial={{ x: 0 }}
+        {/* Navigation Container */}
+        <motion.div
+          animate={{
+            backgroundColor: isScrolled
+              ? "rgba(255,255,255,0.05)"
+              : "rgba(0,0,0,0.1)",
+            paddingLeft: isScrolled ? "12px" : "24px",
+            paddingRight: isScrolled ? "12px" : "24px",
+            paddingTop: isScrolled ? "4px" : "8px",
+            paddingBottom: isScrolled ? "4px" : "8px",
+            borderRadius: "9999px",
+          }}
+          transition={springTransition}
+          className="flex items-center justify-center backdrop-blur-sm"
+        >
+          {/* Navigation Links */}
+          <motion.ul
+            className="flex items-center"
             animate={{
-              boxShadow:
-                scrollY >= 120
-                  ? "0 0 0 1px rgba(255,255,255,.08), 0 1px 2px -1px rgba(255,255,255,.08), 0 2px 4px rgba(255,255,255,.04)"
-                  : "none",
+              gap: isScrolled ? "4px" : "8px",
+            }}
+            transition={springTransition}
+          >
+            {navLinks.map((navItem) => (
+              <motion.li
+                key={navItem.id}
+                animate={{
+                  scale: isScrolled ? 0.9 : 1,
+                }}
+                transition={springTransition}
+              >
+                <motion.a
+                  href={navItem.link}
+                  className="text-white hover:text-gray-300 font-medium whitespace-nowrap block"
+                  animate={{
+                    fontSize: isScrolled ? "14px" : "16px",
+                    paddingLeft: isScrolled ? "8px" : "12px",
+                    paddingRight: isScrolled ? "8px" : "12px",
+                    paddingTop: isScrolled ? "4px" : "8px",
+                    paddingBottom: isScrolled ? "4px" : "8px",
+                  }}
+                  transition={springTransition}
+                >
+                  {navItem.label}
+                </motion.a>
+              </motion.li>
+            ))}
+          </motion.ul>
+
+          {/* Inline Get Started Button - Appears when scrolled */}
+          <motion.div
+            animate={{
+              width: isScrolled ? "auto" : "0px",
+              opacity: isScrolled ? 1 : 0,
+              marginLeft: isScrolled ? "8px" : "0px",
+              scale: isScrolled ? 1 : 0.8,
             }}
             transition={{
-              ease: "linear",
-              duration: 0.05,
-              delay: 0.05,
-            }}
-            className="flex h-12 w-auto items-center justify-center overflow-hidden rounded-full px-6 py-2.5 transition-all bg-black/20 md:p-1.5 md:py-2"
-          >
-            <nav className="relative h-full items-center justify-between gap-x-3.5 md:flex">
-              <ul className="flex h-full flex-col justify-center gap-6 md:flex-row md:justify-start md:gap-0 lg:gap-1">
-                {navLinks.map((navItem) => (
-                  <li
-                    key={navItem.id}
-                    className="flex items-center justify-center px-[0.75rem] py-[0.375rem]"
-                  >
-                    <a
-                      href={navItem.link}
-                      className="text-white hover:text-gray-300 transition-colors"
-                    >
-                      {navItem.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{
-                width: scrollY >= 120 ? "auto" : 0,
-              }}
-              transition={{
-                ease: "linear",
+              ...smoothTransition,
+              opacity: {
                 duration: 0.25,
-                delay: 0.05,
+                ease: easeOut,
+                delay: isScrolled ? 0.1 : 0,
+              },
+            }}
+            className="overflow-hidden"
+          >
+            <motion.a
+              href="#"
+              className="inline-flex items-center justify-center rounded-full bg-[#BAFF38] text-black font-medium hover:bg-[#a8e632] transition-colors whitespace-nowrap"
+              animate={{
+                paddingLeft: isScrolled ? "12px" : "0px",
+                paddingRight: isScrolled ? "12px" : "0px",
+                paddingTop: isScrolled ? "4px" : "0px",
+                paddingBottom: isScrolled ? "4px" : "0px",
+                fontSize: isScrolled ? "14px" : "0px",
               }}
-              className="!hidden overflow-hidden rounded-full md:!block"
+              transition={springTransition}
             >
-              <AnimatePresence>
-                {scrollY >= 120 && (
-                  <motion.ul
-                    initial={{ x: "125%" }}
-                    animate={{ x: "0" }}
-                    exit={{
-                      x: "125%",
-                      transition: { ease: "linear", duration: 1 },
-                    }}
-                    transition={{ ease: "linear", duration: 0.3 }}
-                    className="shrink-0 whitespace-nowrap"
-                  >
-                    <li>
-                      <a
-                        href="#"
-                        className="relative inline-flex w-fit items-center justify-center gap-x-1.5 overflow-hidden rounded-full bg-[#BAFF38] px-3 py-1.5 text-black outline-none"
-                      >
-                        Get Started
-                      </a>
-                    </li>
-                  </motion.ul>
-                )}
-              </AnimatePresence>
-            </motion.div>
+              Get Started
+            </motion.a>
           </motion.div>
-        </ul>
+        </motion.div>
 
+        {/* Right Side Get Started Button - Hides when scrolled */}
         <motion.div
-          className="z-[999] hidden items-center gap-x-5 md:flex"
+          className="flex items-center overflow-hidden"
           animate={{
-            y: scrollY >= 120 ? -50 : 0,
-            opacity: scrollY >= 120 ? 0 : 1,
+            width: isScrolled ? "0px" : "auto",
+            opacity: isScrolled ? 0 : 1,
+            marginLeft: isScrolled ? "0px" : "32px",
+            scale: isScrolled ? 0.8 : 1,
           }}
-          transition={{ duration: 0.15 }}
+          transition={{
+            ...smoothTransition,
+            opacity: {
+              duration: 0.25,
+              ease: easeOut,
+              delay: isScrolled ? 0 : 0.1,
+            },
+          }}
         >
           <motion.button
-            className="bg-[#BAFF38] text-zinc-900 text-md px-6 py-2 rounded-full border border-gray-600 transition-colors hover:bg-[#a8e632] active:scale-95"
+            className="bg-[#BAFF38] text-zinc-900 font-medium rounded-full border border-gray-600 transition-colors hover:bg-[#a8e632] whitespace-nowrap"
+            animate={{
+              paddingLeft: isScrolled ? "0px" : "24px",
+              paddingRight: isScrolled ? "0px" : "24px",
+              paddingTop: isScrolled ? "0px" : "8px",
+              paddingBottom: isScrolled ? "0px" : "8px",
+            }}
+            transition={springTransition}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -162,11 +238,12 @@ export function StickyHeader() {
           </motion.button>
         </motion.div>
 
-        <MotionConfig transition={{ duration: 0.3, ease: "easeInOut" }}>
+        {/* Mobile Menu Button */}
+        <MotionConfig transition={fastTransition}>
           <motion.button
             onClick={() => setActive((prev) => !prev)}
             animate={active ? "open" : "close"}
-            className="relative flex h-8 w-8 items-center justify-center rounded-md md:hidden"
+            className="relative flex h-8 w-8 items-center justify-center rounded-md md:hidden ml-4"
           >
             <motion.span
               style={{ left: "50%", top: "35%", x: "-50%", y: "-50%" }}
@@ -181,20 +258,15 @@ export function StickyHeader() {
                   top: ["50%", "50%", "35%"],
                 },
               }}
-              transition={{ duration: 0.3 }}
-            ></motion.span>
+            />
             <motion.span
               style={{ left: "50%", top: "50%", x: "-50%", y: "-50%" }}
               className="absolute h-0.5 w-5 bg-white"
               variants={{
-                open: {
-                  opacity: 0,
-                },
-                close: {
-                  opacity: 1,
-                },
+                open: { opacity: 0 },
+                close: { opacity: 1 },
               }}
-            ></motion.span>
+            />
             <motion.span
               style={{ left: "50%", bottom: "30%", x: "-50%", y: "-50%" }}
               className="absolute h-0.5 w-5 bg-white"
@@ -208,11 +280,10 @@ export function StickyHeader() {
                   top: ["50%", "50%", "65%"],
                 },
               }}
-              transition={{ duration: 0.3 }}
-            ></motion.span>
+            />
           </motion.button>
         </MotionConfig>
       </nav>
-    </header>
+    </motion.header>
   );
 }

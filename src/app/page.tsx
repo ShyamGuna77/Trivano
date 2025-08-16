@@ -9,6 +9,7 @@ import Testimonals from "@/components/Testimonals";
 import { BentoShowcase } from "@/components/Bento-showcase";
 import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
+import { SecuritySection } from "@/components/GlowingGrids/SecuritySection";
 import { useRef } from "react";
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
 
       <BentoShowcase />
       <Pricing />
+      <SecuritySection />
       <Footer />
     </div>
   );

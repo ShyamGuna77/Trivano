@@ -8,23 +8,23 @@ import {
 export const items = [
   {
     icon: <CalendarSearch />,
-    title: "Book a Demo",
-    description: "Book a demo with our team to see how we can help you.",
+    title: "Shared Calendar",
+    description: "Use a Calender to schedule meetings and events.",
   },
   {
     icon: <MessageSquareDot />,
-    title: "Book a Demo",
-    description: "Book a demo with our team to see how we can help you.",
+    title: "Real-time Messaging",
+    description: "Stay Connected. Chat with your team in real-time.",
   },
   {
     icon: <ClipboardList />,
-    title: "Book a Demo",
-    description: "Book a demo with our team to see how we can help you.",
+    title: "Task Management",
+    description: "Use kanban boards to manage your tasks and projects.",
   },
   {
     icon: <TabletSmartphone />,
-    title: "Book a Demo",
-    description: "Book a demo with our team to see how we can help you.",
+    title: "Mobile App Support",
+    description: "Access your workspace on the go with our mobile app.",
   },
 ];
 

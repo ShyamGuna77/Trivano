@@ -15,10 +15,10 @@ const companies = [
 
 export function Companies() {
   return (
-    <section id="companies">
+    <section id="companies ">
       <div className="py-14">
         <div className="container mx-auto px-4 md:px-8">
-          <h3 className="text-center text-xl font-semibold text-[#BAFF38] mb-4">
+          <h3 className="text-center md:text-3xl lg:text-4xl text-[#EAECE5] text-4xl font-semibold tracking-tight text-balance mt-8 mb-12">
             TRUSTED BY LEADING TEAMS
           </h3>
           <div className="relative mt-6">
