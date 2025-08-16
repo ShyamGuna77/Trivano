@@ -10,21 +10,17 @@ import { BentoShowcase } from "@/components/Bento-showcase";
 import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
 import { SecuritySection } from "@/components/GlowingGrids/SecuritySection";
-import { useRef } from "react";
 
 export default function Home() {
-  
   return (
     <div className="min-h-screen bg-black">
-      <StickyHeader  />
+      <StickyHeader />
 
       <HomeComponent />
       <Companies />
       <FeautureItems />
       <Efforts />
-
       <Testimonals />
-
       <BentoShowcase />
       <Pricing />
       <SecuritySection />
