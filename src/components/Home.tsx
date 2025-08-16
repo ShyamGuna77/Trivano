@@ -71,7 +71,7 @@ export default function Home() {
             >
               <SlideArrowButton
                 text="Book a Demo"
-                primaryColor="#0E0F0C"
+                primaryColor="#000000"
                 textColor="text-black"
                 hoverTextColor="group-hover:text-white group-active:text-white"
                 className="w-full sm:w-auto justify-center touch-manipulation"

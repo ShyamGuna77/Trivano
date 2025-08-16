@@ -9,11 +9,13 @@ import Testimonals from "@/components/Testimonals";
 import { BentoShowcase } from "@/components/Bento-showcase";
 import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
+import { useRef } from "react";
 
 export default function Home() {
+  
   return (
     <div className="min-h-screen bg-black">
-      <StickyHeader />
+      <StickyHeader  />
 
       <HomeComponent />
       <Companies />
