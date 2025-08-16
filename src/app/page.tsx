@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef } from "react";
 import { StickyHeader } from "@/components/Navbar";
 import HomeComponent from "@/components/Home";
 import { Companies } from "@/components/Companies";
@@ -12,21 +11,20 @@ import Pricing from "@/components/Pricing";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div ref={containerRef} className="min-h-screen overflow-y-auto bg-black">
-      <StickyHeader containerRef={containerRef} />
-      <main className="w-full">
-        <HomeComponent />
-        <Companies />
-        <FeautureItems />
-        <Efforts />
-        <Testimonals />
-        <BentoShowcase />
-        <Pricing />
-        <Footer />
-      </main>
+    <div className="min-h-screen bg-black">
+      <StickyHeader />
+
+      <HomeComponent />
+      <Companies />
+      <FeautureItems />
+      <Efforts />
+
+      <Testimonals />
+
+      <BentoShowcase />
+      <Pricing />
+      <Footer />
     </div>
   );
 }
