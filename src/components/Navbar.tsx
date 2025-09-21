@@ -53,11 +53,7 @@ export function StickyHeader() {
 
   // Debounced scroll state update to prevent laggy transitions
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
       setIsScrolled(scrollY >= 120);
-    }, 10); // Small delay to debounce rapid scroll events
-
-    return () => clearTimeout(timeoutId);
   }, [scrollY]);
 
   // Optimized easing functions for smooth animations
@@ -119,7 +115,7 @@ export function StickyHeader() {
           paddingTop: isScrolled ? "8px" : "16px",
           paddingBottom: isScrolled ? "8px" : "16px",
         }}
-        transition={springTransition}
+        transition={smoothTransition}
         className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-full"
         style={
           {
@@ -136,9 +132,9 @@ export function StickyHeader() {
           <div className="hidden md:flex items-center justify-center w-full">
             {/* Logo and Title Container - Desktop Only */}
             <motion.div
-              className="flex items-center gap-2 overflow-hidden"
+              className="flex items-center gap-2 overflow-hidden flex-shrink-0"
               animate={{
-                width: isScrolled ? "0px" : "auto",
+                maxWidth: isScrolled ? "0px" : "500px",
                 opacity: isScrolled ? 0 : 1,
                 marginRight: isScrolled ? "0px" : "32px",
                 scale: isScrolled ? 0.8 : 1,
@@ -168,7 +164,7 @@ export function StickyHeader() {
                 paddingBottom: isScrolled ? "4px" : "8px",
                 borderRadius: "9999px",
               }}
-              transition={springTransition}
+              transition={smoothTransition}
             >
               {/* Navigation Links */}
               <motion.ul
@@ -176,7 +172,7 @@ export function StickyHeader() {
                 animate={{
                   gap: isScrolled ? "4px" : "8px",
                 }}
-                transition={springTransition}
+                transition={smoothTransition}
               >
                 {navLinks.map((navItem) => (
                   <motion.li
@@ -184,7 +180,7 @@ export function StickyHeader() {
                     animate={{
                       scale: isScrolled ? 0.9 : 1,
                     }}
-                    transition={springTransition}
+                    transition={smoothTransition}
                   >
                     <motion.a
                       href={navItem.link}
@@ -196,7 +192,7 @@ export function StickyHeader() {
                         paddingTop: isScrolled ? "4px" : "8px",
                         paddingBottom: isScrolled ? "4px" : "8px",
                       }}
-                      transition={springTransition}
+                      transition={smoothTransition}
                     >
                       {navItem.label}
                     </motion.a>
@@ -207,7 +203,7 @@ export function StickyHeader() {
               {/* Inline Get Started Button - Appears when scrolled */}
               <motion.div
                 animate={{
-                  width: isScrolled ? "auto" : "0px",
+                  maxWidth: isScrolled ? "500px" : "0px",
                   opacity: isScrolled ? 1 : 0,
                   marginLeft: isScrolled ? "8px" : "0px",
                   scale: isScrolled ? 1 : 0.8,
@@ -225,7 +221,7 @@ export function StickyHeader() {
                     paddingBottom: isScrolled ? "4px" : "0px",
                     fontSize: isScrolled ? "14px" : "0px",
                   }}
-                  transition={springTransition}
+                  transition={smoothTransition}
                 >
                   Get Started
                 </motion.a>
@@ -234,9 +230,9 @@ export function StickyHeader() {
 
             {/* Right Side Get Started Button - Desktop Only */}
             <motion.div
-              className="flex items-center overflow-hidden"
+              className="flex items-center overflow-hidden flex-shrink-0"
               animate={{
-                width: isScrolled ? "0px" : "auto",
+                maxWidth: isScrolled ? "0px" : "500px",
                 opacity: isScrolled ? 0 : 1,
                 marginLeft: isScrolled ? "0px" : "32px",
                 scale: isScrolled ? 0.8 : 1,
@@ -246,12 +242,12 @@ export function StickyHeader() {
               <motion.button
                 className="bg-[#BAFF38] text-zinc-900 font-medium rounded-full border border-gray-600 transition-colors hover:bg-[#a8e632] whitespace-nowrap"
                 animate={{
-                  paddingLeft: isScrolled ? "0px" : "24px",
-                  paddingRight: isScrolled ? "0px" : "24px",
-                  paddingTop: isScrolled ? "0px" : "8px",
-                  paddingBottom: isScrolled ? "0px" : "8px",
+                  paddingLeft: isScrolled ? "0px" : "18px",
+                  paddingRight: isScrolled ? "0px" : "18px",
+                  paddingTop: isScrolled ? "0px" : "6px",
+                  paddingBottom: isScrolled ? "0px" : "6px",
                 }}
-                transition={springTransition}
+                transition={smoothTransition}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
